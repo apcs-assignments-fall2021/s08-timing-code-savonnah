@@ -18,8 +18,11 @@ public class MyMain {
     // makeRandomArray(5) => [0, 2, 2, 1, 3]
     // makeRandomArray(1) => [0]
     public static int[] makeRandomArray(int x) {
-        // YOUR CODE HERE
-        return new int[0];
+        int[] arr = new int[x];
+        for (int i = 0; i < arr.length; i++){
+            arr[i] = (int) ((Math.random()*10));
+        }
+        return arr;
     }
 
     // *********
@@ -163,53 +166,102 @@ public class MyMain {
     // *********
 
     public static void main(String[] args) {
+        int[] arr= makeRandomArray(10);
+        System.out.println(Arrays.toString(arr));
+
+
         // A single trial of linear search vs. binary search
+//        int[] arr1 = makeRandomArray(10);
+//        arr1 = mergeSort(arr1);
+//        int[] arr2 = copyArray(arr1);
+//
+//        long start1 = System.nanoTime();
+//        linearSearch(arr1, -1);
+//        long end1 = System.nanoTime();
+//
+//        System.out.println("Linear search: " + (end1-start1)  + " ns");
+//
+//        long start2 = System.nanoTime();
+//        binarySearch(arr2, -1);
+//        long end2 = System.nanoTime();
+//
+//        System.out.println("Binary search: " + (end2-start2)  + " ns");
+//
+//        // Running Multiple Trials
+//        long linearTotal = 0;
+//        long binaryTotal = 0;
+//
+//        int numTrials = 10000;
+//
+//        for (int i = 0; i < numTrials; i++) {
+//            // A single trial of linear search vs. binary search
+//            int[] arr1Trial = makeRandomArray(8000); // changes number = change size off array
+//            arr1Trial = mergeSort(arr1Trial); //take this out when running sorting algorithm
+//            int[] arr2Trial = copyArray(arr1Trial);
+//
+//            long start1Trial = System.nanoTime();
+//            linearSearch(arr1Trial, -1);
+//            long end1Trial = System.nanoTime();
+//
+//            linearTotal += (end1Trial-start1Trial);
+//
+//            //System.out.println("Linear search: " + (end1Trial-start1Trial)  + " ns");
+//
+//            long start2Trial = System.nanoTime();
+//            binarySearch(arr2Trial, -1);
+//            long end2Trial = System.nanoTime();
+//
+//            binaryTotal += (end2Trial-start2Trial);
+//
+//            //System.out.println("Binary search: " + (end2Trial-start2Trial)  + " ns");
+//        }
+//
+//        System.out.println("Linear search: " + (linearTotal / numTrials)  + " ns on average");
+//        System.out.println("Binary search: " + (binaryTotal / numTrials)  + " ns on average");
         int[] arr1 = makeRandomArray(10);
-        arr1 = mergeSort(arr1);
         int[] arr2 = copyArray(arr1);
 
         long start1 = System.nanoTime();
-        linearSearch(arr1, -1);
+        insertionSort(arr1);
         long end1 = System.nanoTime();
 
-        System.out.println("Linear search: " + (end1-start1)  + " ns");
+        System.out.println("Insertion Sort: " + (end1-start1)  + " ns");
 
         long start2 = System.nanoTime();
-        binarySearch(arr2, -1);
+        mergeSort(arr2);
         long end2 = System.nanoTime();
 
-        System.out.println("Binary search: " + (end2-start2)  + " ns");
+        System.out.println("Merge Sort: " + (end2-start2)  + " ns");
 
         // Running Multiple Trials
-        long linearTotal = 0;
-        long binaryTotal = 0;
+        long insertionTotal = 0;
+        long mergeTotal = 0;
 
         int numTrials = 10000;
 
         for (int i = 0; i < numTrials; i++) {
             // A single trial of linear search vs. binary search
-            int[] arr1Trial = makeRandomArray(1000);
-            arr1Trial = mergeSort(arr1Trial);
+            int[] arr1Trial = makeRandomArray(8000); // changes number = change size off array
             int[] arr2Trial = copyArray(arr1Trial);
 
             long start1Trial = System.nanoTime();
-            linearSearch(arr1Trial, -1);
+            insertionSort(arr1Trial);
             long end1Trial = System.nanoTime();
 
-            linearTotal += (end1Trial-start1Trial);
+            insertionTotal += (end1Trial-start1Trial);
 
             //System.out.println("Linear search: " + (end1Trial-start1Trial)  + " ns");
 
             long start2Trial = System.nanoTime();
-            binarySearch(arr2Trial, -1);
+            mergeSort(arr2Trial);
             long end2Trial = System.nanoTime();
 
-            binaryTotal += (end2Trial-start2Trial);
+            mergeTotal += (end2Trial-start2Trial);
 
             //System.out.println("Binary search: " + (end2Trial-start2Trial)  + " ns");
         }
 
-        System.out.println("Linear search: " + (linearTotal / numTrials)  + " ns on average");
-        System.out.println("Binary search: " + (binaryTotal / numTrials)  + " ns on average");
+        System.out.println("Insertion search: " + (insertionTotal / numTrials)  + " ns on average");
+        System.out.println("Merge search: " + (mergeTotal / numTrials)  + " ns on average");
     }
 }
